@@ -1,5 +1,9 @@
 #include <iostream>
 using namespace std;
+#include "ATMachine.h"
+#include "Account.h"
+
+// 지금은 feature 브랜치
 
 int main() {
     int select;
@@ -7,15 +11,20 @@ int main() {
     ATMachine atm(100, 50000, "admin");
     while (1) {
         atm.displayMenu();
-        cout <<"메뉴를선택하세요: ";
+        cout <<"메뉴를 선택하세요: ";
         cin >> select;
         cout << endl;
         switch (select) {
             case 1:
                 atm.createAccount();
                 break;
+            case 2:
+                atm.checkMoney();
+                break;
+            case 9:
+                break;
 
-            default:
+                default:
                 cout << "번호 확인 후 다시 입력하세요." << endl;
         }
     }
