@@ -5,6 +5,7 @@ using std::string;
 #define NEGATIVE_ATM_BALANCE -10 // ATM 잔액 부족
 
 // 지금은 feature 브랜치
+// 다시 커밋합니다.
 
 class ATMachine {
 private:

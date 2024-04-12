@@ -7,6 +7,7 @@ using namespace std;
 
 // 여기서 develop할거에요
 // 지금은 feature 브랜치
+// 다시 커밋합니다.
 void ATMachine::displayMenu(){
 
     cout << "-------------------" << endl;
