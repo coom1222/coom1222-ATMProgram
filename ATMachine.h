@@ -24,6 +24,3 @@ public:
 
 #endif
 
-//createAccount() 에서 계좌번호 생성시 (100 ~ 999번) 까지 랜덤으로 번호 생성
-//#include <random>
-// random_device , mt19937 클래스 활용
