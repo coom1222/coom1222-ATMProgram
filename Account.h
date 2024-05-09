@@ -20,5 +20,8 @@ public:
     int getID() { return nID; } // 계좌 번호 읽어오기
     void close();   //잔액이 존재하면 해지 불가.
     int getBalance();
+    int deposit(int id, const string& password, int money); // 계좌 입금
+    int widraw(int id, const string& password, int money);  // 계좌 출금
+    bool deposit(int id, int money);    // 송금계좌와 이체 금액
 };
 #endif

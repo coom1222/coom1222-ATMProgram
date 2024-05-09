@@ -22,6 +22,8 @@ public:
     void checkMoney(); // 계좌 조회
     void closeAccount();    // 계좌 해지 기능 추가
     void depositMoney();    // 계좌 입금 기능 추가
+    void widrawMoney();     // 계좌 출금 기능 추가
+    void transfer();        // 계좌 이체
 };
 
 #endif
