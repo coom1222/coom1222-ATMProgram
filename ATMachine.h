@@ -15,11 +15,12 @@ private:
     int nCurrentAccountNum; // 개설된 고객 계좌 수
     string strManagerPassword; // 관리자 비밀번호
 public:
-    ATMachine(int size, int balance, string password); // 계좌 배열크기, ATM 잔고, 관리자 암호 초기화
+    ATMachine(int size, int balance, const string& password); // 계좌 배열크기, ATM 잔고, 관리자 암호 초기화
     ~ATMachine();
     void displayMenu(); // ATM 기능 선택 화면
     void createAccount(); // 계좌 개설
     void checkMoney(); // 계좌 조회
+    void closeAccount();    // 계좌 해지기능 추가
 };
 
 #endif
