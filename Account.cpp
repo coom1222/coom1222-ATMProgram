@@ -40,3 +40,22 @@ int Account::getBalance() {
     return nBalance;
 }
 
+int Account::deposit(int id, const string& password, int money) {
+    if (nID == id && strPassword == password) {
+        nBalance += money;
+        return nBalance;
+    } else {
+        return AUTHENTIFICATION_FAIL;
+    }
+}
+
+int Account::widraw(int id, const std::string &password, int money) {
+    if (nID == id && strPassword == password) {
+        nBalance -= money;
+        return nBalance;
+
+
+    } else {
+        return AUTHENTIFICATION_FAIL;
+    }
+}
