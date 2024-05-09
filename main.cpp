@@ -26,6 +26,12 @@ int main() {
             case 3:
                 atm.closeAccount();
                 break;
+            case 4:
+                atm.depositMoney();
+                break;
+            case 5:
+                atm.widrawMoney();
+                break;
             case 9:
                 cout << "업무를 종료합니다." << endl << "안녕히 가세요.";
                 run = false;
