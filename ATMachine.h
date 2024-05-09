@@ -20,7 +20,8 @@ public:
     void displayMenu(); // ATM 기능 선택 화면
     void createAccount(); // 계좌 개설
     void checkMoney(); // 계좌 조회
-    void closeAccount();    // 계좌 해지기능 추가
+    void closeAccount();    // 계좌 해지 기능 추가
+    void depositMoney();    // 계좌 입금 기능 추가
 };
 
 #endif
