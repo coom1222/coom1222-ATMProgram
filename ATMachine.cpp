@@ -3,5 +3,119 @@
 //
 #include <iostream>
 #include "ATMachine.h"
+#include "Account.h"
+#include <random>
+using namespace std;
 
 // 여기서 develop할거에요
+// ATM클래스의 생성자 구현
+
+ATMachine::~ATMachine() {
+    delete [] pAcctArray;
+}
+
+
+ATMachine::ATMachine(int size, int balance, const string& password) {
+    nMaxAccountNum = size;
+    nMachineBalance = balance;
+    strManagerPassword = password;
+    pAcctArray = new Account[size]; // size만큼 Account 객체 배열 동적 할당
+    nCurrentAccountNum = 0; // 현재 계좌 수를 0으로 초기화
+}
+
+void ATMachine::displayMenu(){
+
+    cout << "-------------------" << endl;
+    cout << "----TUKOREA BANK----" << endl;
+    cout << "-------------------" << endl;
+    cout << "1. 계좌 개설 " << endl;
+    cout << "2. 계좌 조회 " << endl;
+    cout << "3. 계좌 해지 " << endl;
+    cout << "9. 업무 종료 " << endl;
+
+}
+
+// 계좌 개설
+void ATMachine::createAccount() {
+    // account.h에서 계좌정보 가져와서 여기서 개설
+    string name;
+    string password;
+
+    cout << endl;
+    cout << "------ 개설 ------" << endl;
+    cout << "이름입력 : " ;
+    cin >> name;
+    cout << "암호 입력: ";
+    cin >> password;
+
+    // 계좌 번호 생성
+    random_device rd; // 시드값을 제공하는 랜덤 디바이스 생성
+    mt19937 gen(rd()); // 랜덤 디바이스를 시드로 사용하는 난수 생성기 생성
+    uniform_int_distribution<int> dis(100, 999); // 100~999 범위의 균일 분포
+    int accountNumber = dis(gen); // 랜덤 계좌 번호 생성
+
+    if (nCurrentAccountNum < nMaxAccountNum) {
+        pAcctArray[nCurrentAccountNum++].create(accountNumber, 0, name, password);
+        cout << name << " 님 " << accountNumber << "번 계좌번호가 정상적으로 개설되었습니다. 감사합니다." << endl;
+    } else {
+        cout << "더 이상 계좌를 개설할 수 없습니다." << endl;
+    }
+}
+
+// 계좌 조회
+void ATMachine::checkMoney() {
+    int accountNumber;
+    string password;
+    cout << "계좌 번호를 입력하세요: ";
+    cin >> accountNumber;
+    cout << "비밀번호를 입력하세요: ";
+    cin >> password;
+
+    bool found = false;
+    for (int i = 0; i < nCurrentAccountNum; i++) {
+        if (pAcctArray[i].getID() == accountNumber) {
+            int balance = pAcctArray[i].check(accountNumber, password);
+            if (balance != AUTHENTIFICATION_FAIL) {
+                cout << "계좌 잔액: " << balance << endl;
+                found = true;
+                break;
+            } else {
+                cout << "비밀번호가 올바르지 않습니다." << endl;
+                found = true;
+                break;
+            }
+        }
+    }
+    if (!found) {
+        cout << "해당하는 계좌가 존재하지 않습니다." << endl;
+    }
+}
+
+
+void ATMachine::closeAccount() {
+    int accountNumber;
+    string password;
+    cout << "계좌 번호를 입력하세요: ";
+    cin >> accountNumber;
+    cout << "비밀번호를 입력하세요: ";
+    cin >> password;
+
+    bool found = false;
+    for (int i = 0; i < nCurrentAccountNum; i++) {
+        if (pAcctArray[i].getID() == accountNumber) {
+            if (pAcctArray[i].getBalance() == 0) {
+                pAcctArray[i].close();
+                cout << accountNumber << "계좌가 해지되었습니다." << endl;
+                found = true;
+                break;
+            } else {
+                cout << "잔액이 남아있어 계좌를 해지할 수 없습니다." << endl;
+                found = true;
+                break;
+            }
+        }
+    }
+    if (!found) {
+        cout << "해당하는 계좌가 존재하지 않습니다." << endl;
+    }
+}
